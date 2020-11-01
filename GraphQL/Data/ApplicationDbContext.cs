@@ -9,6 +9,14 @@ namespace Eshop.GraphQL.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {  
+            modelBuilder
+                .Entity<UserOrder>()
+                .HasKey(uo => new { uo.UserId, uo.OrderId });
+        }
+
         public DbSet<User> Users { get; set; } = default!;
+        public DbSet<Order> Orders { get; set; } = default!;
     }
 }

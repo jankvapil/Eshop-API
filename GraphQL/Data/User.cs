@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Eshop.GraphQL.Data
@@ -13,5 +14,8 @@ namespace Eshop.GraphQL.Data
         [Required]
         [StringLength(200)]
         public string? Email { get; set; }
+
+        public ICollection<UserOrder> UserOrders { get; set; } =
+            new List<UserOrder>();
     }
 }

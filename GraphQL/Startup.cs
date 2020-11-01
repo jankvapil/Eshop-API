@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Eshop.GraphQL;
 using Eshop.GraphQL.Data;
+using Eshop.GraphQL.DataLoader;
 
 namespace GraphQL
 {
@@ -19,12 +20,13 @@ namespace GraphQL
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddPooledDbContextFactory<ApplicationDbContext>(options => options.UseSqlite("Data Source=conferences.db"));
+            services.AddPooledDbContextFactory<ApplicationDbContext>(options => options.UseSqlite("Data Source=eshop.db"));
 
             services
                 .AddGraphQLServer()
                 .AddQueryType<Query>()
-                .AddMutationType<Mutation>();
+                .AddMutationType<Mutation>()
+                .AddDataLoader<OrderByIdDataLoader>();
 
         }
 
