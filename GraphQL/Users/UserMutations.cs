@@ -1,10 +1,14 @@
+using System.Threading;
 using System.Threading.Tasks;
+using Eshop.GraphQL.Common;
 using Eshop.GraphQL.Data;
 using HotChocolate;
+using HotChocolate.Types;
 
-namespace Eshop.GraphQL
+namespace Eshop.GraphQL.Users
 {
-    public class Mutation
+    [ExtendObjectType(Name = "Mutation")]
+    public class UserMutations
     {
       
         [UseApplicationDbContext]

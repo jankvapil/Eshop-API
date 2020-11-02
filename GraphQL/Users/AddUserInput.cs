@@ -1,4 +1,4 @@
-namespace Eshop.GraphQL
+namespace Eshop.GraphQL.Users
 {
     public record AddUserInput(
         string Name,

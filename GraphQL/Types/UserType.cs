@@ -7,6 +7,7 @@ using Eshop.GraphQL.Data;
 using Eshop.GraphQL.DataLoader;
 using HotChocolate;
 using HotChocolate.Types;
+using HotChocolate.Resolvers;
 
 namespace Eshop.GraphQL.Types
 {
@@ -14,11 +15,16 @@ namespace Eshop.GraphQL.Types
     {
         protected override void Configure(IObjectTypeDescriptor<User> descriptor)
         {
-            descriptor
-                .Field(t => t.UserOrders)
-                .ResolveWith<UserResolvers>(t => t.GetOrdersAsync(default!, default!, default!, default))
-                .UseDbContext<ApplicationDbContext>()
-                .Name("orders");
+          descriptor
+            .AsNode()
+            .IdField(t => t.Id)
+            .NodeResolver((ctx, id) => ctx.DataLoader<UserByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
+              
+          descriptor
+            .Field(t => t.UserOrders)
+            .ResolveWith<UserResolvers>(t => t.GetOrdersAsync(default!, default!, default!, default))
+            .UseDbContext<ApplicationDbContext>()
+            .Name("orders");
         }
 
         private class UserResolvers

@@ -12,6 +12,7 @@ using Eshop.GraphQL;
 using Eshop.GraphQL.Types;
 using Eshop.GraphQL.Data;
 using Eshop.GraphQL.DataLoader;
+using Eshop.GraphQL.Users;
 
 namespace GraphQL
 {
@@ -25,10 +26,12 @@ namespace GraphQL
 
             services
                 .AddGraphQLServer()
-                .AddQueryType<Query>()
-                .AddMutationType<Mutation>()
-                // .AddType<OrderType>()
+                .AddQueryType(d => d.Name("Query"))
+                    .AddType<UserQueries>()
+                .AddMutationType(d => d.Name("Mutation"))
+                    .AddTypeExtension<UserMutations>()
                 .AddType<UserType>()
+                .EnableRelaySupport()
                 .AddDataLoader<OrderByIdDataLoader>()
                 .AddDataLoader<UserByIdDataLoader>();
 
