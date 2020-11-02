@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GraphQL.Migrations
+namespace Eshop.GraphQL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -70,7 +70,7 @@ namespace GraphQL.Migrations
             modelBuilder.Entity("Eshop.GraphQL.Data.UserOrder", b =>
                 {
                     b.HasOne("Eshop.GraphQL.Data.Order", "Order")
-                        .WithMany()
+                        .WithMany("UserOrders")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -84,6 +84,11 @@ namespace GraphQL.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Eshop.GraphQL.Data.Order", b =>
+                {
+                    b.Navigation("UserOrders");
                 });
 
             modelBuilder.Entity("Eshop.GraphQL.Data.User", b =>

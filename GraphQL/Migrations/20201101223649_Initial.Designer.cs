@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GraphQL.Migrations
+namespace Eshop.GraphQL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201101211528_Refactoring")]
-    partial class Refactoring
+    [Migration("20201101223649_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,7 +72,7 @@ namespace GraphQL.Migrations
             modelBuilder.Entity("Eshop.GraphQL.Data.UserOrder", b =>
                 {
                     b.HasOne("Eshop.GraphQL.Data.Order", "Order")
-                        .WithMany()
+                        .WithMany("UserOrders")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -86,6 +86,11 @@ namespace GraphQL.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Eshop.GraphQL.Data.Order", b =>
+                {
+                    b.Navigation("UserOrders");
                 });
 
             modelBuilder.Entity("Eshop.GraphQL.Data.User", b =>

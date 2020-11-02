@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using HotChocolate;
@@ -16,11 +15,17 @@ namespace Eshop.GraphQL
         public Task<List<User>> GetUsers([ScopedService] ApplicationDbContext context) =>
             context.Users.ToListAsync();
 
-        public Task<Order> GetOrderAsync(
+        public Task<User> GetUserAsync(
             int id,
-            OrderByIdDataLoader dataLoader,
+            UserByIdDataLoader dataLoader,
             CancellationToken cancellationToken) =>
             dataLoader.LoadAsync(id, cancellationToken);
+
+        // public Task<Order> GetOrderAsync(
+        //     int id,
+        //     OrderByIdDataLoader dataLoader,
+        //     CancellationToken cancellationToken) =>
+        //     dataLoader.LoadAsync(id, cancellationToken);
     
     }
 }

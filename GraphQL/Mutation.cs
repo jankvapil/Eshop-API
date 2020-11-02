@@ -10,7 +10,7 @@ namespace Eshop.GraphQL
         [UseApplicationDbContext]
         public async Task<AddUserPayload> AddUserAsync(
             AddUserInput input,
-            [Service] ApplicationDbContext context)
+            [ScopedService] ApplicationDbContext context)
         {
             var user = new User
             {

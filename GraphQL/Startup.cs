@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Eshop.GraphQL;
+using Eshop.GraphQL.Types;
 using Eshop.GraphQL.Data;
 using Eshop.GraphQL.DataLoader;
 
@@ -26,7 +27,10 @@ namespace GraphQL
                 .AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddMutationType<Mutation>()
-                .AddDataLoader<OrderByIdDataLoader>();
+                // .AddType<OrderType>()
+                .AddType<UserType>()
+                .AddDataLoader<OrderByIdDataLoader>()
+                .AddDataLoader<UserByIdDataLoader>();
 
         }
 
