@@ -14,8 +14,8 @@ namespace Eshop.GraphQL.Data
         [Required]
         public System.DateTime? OrderDate { get; set; }
 
-        // public ICollection<UserOrder> UserOrders { get; set; } =
-        //   new List<UserOrder>();
+        public ICollection<UserOrder> UserOrders { get; set; } =
+          new List<UserOrder>();
 
         // [Required]
         // [StringLength(200)]
