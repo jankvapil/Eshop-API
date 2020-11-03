@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eshop.GraphQL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201101223649_Initial")]
+    [Migration("20201103161804_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

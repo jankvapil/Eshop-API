@@ -4,15 +4,15 @@ using Eshop.GraphQL.Data;
 
 namespace Eshop.GraphQL.Users
 {
-    public class UserPayloadBase : Payload
+    public class AddUserOrderPayload : Payload
     {
-        protected UserPayloadBase(User user)
+        public AddUserOrderPayload(User user)
         {
             User = user;
         }
 
-        protected UserPayloadBase(IReadOnlyList<UserError> errors)
-            : base(errors)
+        public AddUserOrderPayload(UserError error)
+            : base(new[] { error })
         {
         }
 

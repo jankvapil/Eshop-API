@@ -23,25 +23,26 @@ namespace Eshop.GraphQL.Types
           descriptor
             .Field(t => t.UserOrders)
             .ResolveWith<UserResolvers>(t => t.GetOrdersAsync(default!, default!, default!, default))
-            .UseDbContext<ApplicationDbContext>()
+            // .UseDbContext<ApplicationDbContext>()
             .Name("orders");
         }
 
         private class UserResolvers
         {
+            [UseApplicationDbContext]
             public async Task<IEnumerable<Order>> GetOrdersAsync(
                 User user,
                 [ScopedService] ApplicationDbContext dbContext,
                 OrderByIdDataLoader orderById,
                 CancellationToken cancellationToken)
             {
-                int[] userIds = await dbContext.Users
+                int[] orderIds = await dbContext.Users
                     .Where(u => u.Id == user.Id)
                     .Include(u => u.UserOrders)
                     .SelectMany(u => u.UserOrders.Select(t => t.OrderId))
                     .ToArrayAsync();
 
-                return await orderById.LoadAsync(userIds, cancellationToken);
+                return await orderById.LoadAsync(orderIds, cancellationToken);
             }
         }
     }

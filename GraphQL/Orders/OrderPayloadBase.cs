@@ -16,6 +16,6 @@ namespace Eshop.GraphQL.Orders
         {
         }
 
-        public Order? Order { get; }
+        public Order? Order { get; init; }
     }
 }

@@ -1,6 +1,22 @@
 
 # GraphQL API
 
+Ukázkový projekt, vytvořený na základě oficiálního [workshopu](https://github.com/ChilliCream/graphql-workshop).
+
+Příkazy pro vytvoření databáze
+
+```console
+dotnet build GraphQL
+dotnet ef migrations add Initial --project GraphQL
+dotnet ef database update --project GraphQL
+```
+
+Spuštění aplikace
+
+```console
+dotnet run --project GraphQL
+```
+
 ## USER
 
 Vytvoření uživatele.
@@ -74,7 +90,7 @@ mutation Addorder {
    }
   }
 }
-}
+
 ```
 
 ### Query
