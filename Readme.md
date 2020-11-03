@@ -17,11 +17,10 @@ Spuštění aplikace
 dotnet run --project GraphQL
 ```
 
-## USER
+## Vytvoření dat (mutace)
 
 Vytvoření uživatele.
 
-### Mutace 
 ```graphql
 mutation AddUser {
   addUser(input: {
@@ -35,7 +34,55 @@ mutation AddUser {
 }
 ```
 
-### Query 
+Vytvoření objednávky.
+
+```graphql
+mutation AddOrder {
+  addOrder(input: {
+    orderDate:  "2020-10-14 12:00:00.0"
+  }) {
+   order {
+     id
+   }
+  }
+}
+```
+
+## Dotazy nad daty (query)
+
+Výběr id a jmen všech uživatelů
+
+```graphql
+query {
+  users {
+    id
+    name
+  }
+}
+
+```
+
+Výběr id a data všech objednávek
+
+```graphql
+query {
+  orders {
+    id
+    orderDate
+  }
+}
+```
+
+Výběr uživatele podle id.
+
+```graphql
+query {
+  user(id: "VXNlcgppMQ==") {
+    name
+    email
+  }
+}
+```
 
 Paralelní vykonávání dotazů.
 
@@ -53,18 +100,7 @@ query GetUserNamesInParallel {
 }
 ```
 
-Výběr uživatele podle id.
-
-```graphql
-query {
-  user(id: "VXNlcgppMQ==") {
-    name
-    email
-  }
-}
-```
-
-Vnořené subquery.
+Vnořené dotazy (spojení tabulek)
 
 ```graphql
 query {
@@ -77,29 +113,5 @@ query {
 }
 ```
 
-## ORDER 
-### Mutace 
 
-```graphql
-mutation Addorder {
-  addOrder(input: {
-    orderDate:  "2020-10-14 12:00:00.0"
-  }) {
-   order {
-     id
-   }
-  }
-}
 
-```
-
-### Query
-
-```graphql
-query {
-  orders {
-    id
-    orderDate
-  }
-}
-```

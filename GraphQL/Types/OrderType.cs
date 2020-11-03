@@ -36,7 +36,7 @@ namespace Eshop.GraphQL.Types
                 UserByIdDataLoader userById,
                 CancellationToken cancellationToken)
             {
-                System.Guid[] userIds = await dbContext.Orders
+                int[] userIds = await dbContext.Orders
                     .Where(o => o.Id == order.Id)
                     .Include(o => o.UserOrders)
                     .SelectMany(o => o.UserOrders.Select(t => t.UserId))

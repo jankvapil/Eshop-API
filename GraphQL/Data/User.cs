@@ -5,7 +5,7 @@ namespace Eshop.GraphQL.Data
 {
     public class User
     {
-        public System.Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(200)]

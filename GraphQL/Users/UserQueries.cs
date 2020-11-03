@@ -19,23 +19,9 @@ namespace Eshop.GraphQL.Users
 
 
         public Task<User> GetUserAsync(
-            [ID(nameof(User))]System.Guid id,
+            [ID(nameof(User))]int id,
             UserByIdDataLoader dataLoader,
             CancellationToken cancellationToken) =>
             dataLoader.LoadAsync(id, cancellationToken);
-            
-
-        // public Task<User> GetUserAsync(
-        //     int id,
-        //     UserByIdDataLoader dataLoader,
-        //     CancellationToken cancellationToken) =>
-        //     dataLoader.LoadAsync(id, cancellationToken);
-
-        // public Task<Order> GetOrderAsync(
-        //     int id,
-        //     OrderByIdDataLoader dataLoader,
-        //     CancellationToken cancellationToken) =>
-        //     dataLoader.LoadAsync(id, cancellationToken);
-    
     }
 }

@@ -19,7 +19,7 @@ namespace Eshop.GraphQL.Orders
 
 
         public Task<Order> GetOrderAsync(
-            [ID(nameof(Order))]System.Guid id,
+            [ID(nameof(Order))]int id,
             OrderByIdDataLoader dataLoader,
             CancellationToken cancellationToken) =>
             dataLoader.LoadAsync(id, cancellationToken);

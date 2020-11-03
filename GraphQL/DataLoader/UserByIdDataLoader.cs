@@ -10,7 +10,7 @@ using HotChocolate.DataLoader;
 
 namespace Eshop.GraphQL.DataLoader
 {
-    public class UserByIdDataLoader : BatchDataLoader<System.Guid, User>
+    public class UserByIdDataLoader : BatchDataLoader<int, User>
     {
         private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
 
@@ -23,8 +23,8 @@ namespace Eshop.GraphQL.DataLoader
                 throw new ArgumentNullException(nameof(dbContextFactory));
         }
 
-        protected override async Task<IReadOnlyDictionary<System.Guid, User>> LoadBatchAsync(
-            IReadOnlyList<System.Guid> keys, 
+        protected override async Task<IReadOnlyDictionary<int, User>> LoadBatchAsync(
+            IReadOnlyList<int> keys, 
             CancellationToken cancellationToken)
         {
             await using ApplicationDbContext dbContext = 
