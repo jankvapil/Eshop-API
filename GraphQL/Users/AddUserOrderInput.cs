@@ -7,7 +7,7 @@ namespace Eshop.GraphQL.Users
 {
     public record AddUserOrderInput(
         [ID(nameof(User))]
-        int UserId,
+        System.Guid UserId,
         [ID(nameof(Order))]
-        IReadOnlyList<int> OrderIds);
+        IReadOnlyList<Guid> OrderIds);
 }

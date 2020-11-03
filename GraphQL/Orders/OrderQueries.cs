@@ -19,23 +19,9 @@ namespace Eshop.GraphQL.Orders
 
 
         public Task<Order> GetOrderAsync(
-            [ID(nameof(Order))]int id,
+            [ID(nameof(Order))]System.Guid id,
             OrderByIdDataLoader dataLoader,
             CancellationToken cancellationToken) =>
             dataLoader.LoadAsync(id, cancellationToken);
-            
-
-        // public Task<User> GetUserAsync(
-        //     int id,
-        //     UserByIdDataLoader dataLoader,
-        //     CancellationToken cancellationToken) =>
-        //     dataLoader.LoadAsync(id, cancellationToken);
-
-        // public Task<Order> GetOrderAsync(
-        //     int id,
-        //     OrderByIdDataLoader dataLoader,
-        //     CancellationToken cancellationToken) =>
-        //     dataLoader.LoadAsync(id, cancellationToken);
-    
     }
 }

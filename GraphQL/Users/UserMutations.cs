@@ -48,7 +48,7 @@ namespace Eshop.GraphQL.Users
             // find the existing user by id in db-context
             User user = await context.Users.FindAsync(input.UserId);
             
-            foreach (int orderId in input.OrderIds)
+            foreach (System.Guid orderId in input.OrderIds)
             {
                 user.UserOrders.Add(new UserOrder
                 {

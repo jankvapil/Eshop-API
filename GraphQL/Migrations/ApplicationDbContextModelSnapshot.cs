@@ -18,9 +18,9 @@ namespace Eshop.GraphQL.Migrations
 
             modelBuilder.Entity("Eshop.GraphQL.Data.Order", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("OrderDate")
                         .IsRequired()
@@ -33,9 +33,9 @@ namespace Eshop.GraphQL.Migrations
 
             modelBuilder.Entity("Eshop.GraphQL.Data.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -54,11 +54,11 @@ namespace Eshop.GraphQL.Migrations
 
             modelBuilder.Entity("Eshop.GraphQL.Data.UserOrder", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "OrderId");
 

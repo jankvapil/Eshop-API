@@ -5,7 +5,7 @@ namespace Eshop.GraphQL.Data
 {
     public class Order
     {
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
 
         [Required]
         public System.DateTime? OrderDate { get; set; }

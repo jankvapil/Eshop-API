@@ -14,6 +14,7 @@ using Eshop.GraphQL.Data;
 using Eshop.GraphQL.DataLoader;
 using Eshop.GraphQL.Users;
 using Eshop.GraphQL.Orders;
+using HotChocolate.AspNetCore.Voyager;
 
 namespace GraphQL
 {
@@ -34,6 +35,7 @@ namespace GraphQL
                     .AddTypeExtension<UserMutations>()
                     .AddTypeExtension<OrderMutations>()
                 .AddType<UserType>()
+                .AddType<OrderType>()
                 .EnableRelaySupport()
                 .AddDataLoader<OrderByIdDataLoader>()
                 .AddDataLoader<UserByIdDataLoader>();
@@ -43,6 +45,12 @@ namespace GraphQL
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.UseVoyager(new VoyagerOptions {
+                Path = "/voyager",
+                QueryPath = "/graphql"
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
