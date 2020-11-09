@@ -19,7 +19,7 @@ dotnet run --project GraphQL
 
 ## Struktura Databáze
 
-![ER](./doc/ER.png =250x)
+![ER](./doc/ER.png)
 
 ## Vytvoření Dat (mutace)
 
