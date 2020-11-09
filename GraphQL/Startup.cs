@@ -26,6 +26,17 @@ namespace GraphQL
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy("DefaultPolicy", builder =>
+                {
+                    builder.AllowAnyHeader()
+                           .WithMethods("GET", "POST")
+                           .WithOrigins("*");
+                });
+            });
+
             services.AddPooledDbContextFactory<ApplicationDbContext>(
                 options => options.UseSqlite("Data Source=eshop.db"));
 
@@ -64,6 +75,7 @@ namespace GraphQL
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("DefaultPolicy");
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

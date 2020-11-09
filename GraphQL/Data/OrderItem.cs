@@ -17,8 +17,5 @@ namespace Eshop.GraphQL.Data
 
         [Required]
         public int? Count { get; set; }
-
-        // public ICollection<Product> Products { get; set; } =
-        //     new List<Product>();
     }
 }

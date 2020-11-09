@@ -2,6 +2,9 @@ namespace Eshop.GraphQL.Products
 {
     public record AddProductInput(
         string Name,
-        float Price
+        float Price,
+        string Type,
+        string Description,
+        string ImgUrl
     );
 }

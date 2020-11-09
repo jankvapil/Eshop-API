@@ -19,6 +19,8 @@ dotnet run --project GraphQL
 
 ## Struktura Databáze
 
+Pro jednoduchost uvažujeme schéma pro SQLite databázi.
+
 ![ER](./doc/ER.png)
 
 ## Vytvoření Dat (mutace)
@@ -137,8 +139,10 @@ query {
 ```graphql
 mutation {
   addProduct(input: {
-    name: "Kofola",
-    price: 29.0
+    name: "NVIDIA GeForce RTX 3080",
+    price: 699.0
+    description: "The GeForce RTX 3080 delivers the ultra performance that gamers crave, powered by Ampere—NVIDIA’s 2nd gen RTX architecture. It’s built with enhanced RT Cores and Tensor Cores, new streaming multiprocessors, and superfast G6X memory for an amazing gaming experience."
+    imgUrl: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6429/6429440_sd.jpg"
   }) {
     product {
       id

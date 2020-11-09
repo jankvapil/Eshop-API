@@ -62,21 +62,31 @@ namespace Eshop.GraphQL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImgUrl")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("OrderItemId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<float?>("Price")
                         .IsRequired()
                         .HasColumnType("REAL");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
-                    b.HasIndex("OrderItemId");
+                    b.HasKey("Id");
 
                     b.ToTable("Products");
                 });
@@ -136,13 +146,6 @@ namespace Eshop.GraphQL.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Eshop.GraphQL.Data.Product", b =>
-                {
-                    b.HasOne("Eshop.GraphQL.Data.OrderItem", null)
-                        .WithMany("Products")
-                        .HasForeignKey("OrderItemId");
-                });
-
             modelBuilder.Entity("Eshop.GraphQL.Data.UserOrder", b =>
                 {
                     b.HasOne("Eshop.GraphQL.Data.Order", "Order")
@@ -167,11 +170,6 @@ namespace Eshop.GraphQL.Migrations
                     b.Navigation("OrderItems");
 
                     b.Navigation("UserOrders");
-                });
-
-            modelBuilder.Entity("Eshop.GraphQL.Data.OrderItem", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Eshop.GraphQL.Data.User", b =>

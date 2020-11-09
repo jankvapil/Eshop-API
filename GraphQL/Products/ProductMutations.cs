@@ -20,7 +20,10 @@ namespace Eshop.GraphQL.Products
             var product = new Product
             {
                 Name = input.Name,
-                Price = input.Price
+                Price = input.Price,
+                Type = input.Type,
+                Description = input.Description,
+                ImgUrl = input.ImgUrl
             };
 
             // add to db-context
