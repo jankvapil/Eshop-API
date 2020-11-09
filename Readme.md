@@ -77,7 +77,7 @@ Výběr uživatele podle id.
 
 ```graphql
 query {
-  user(id: "VXNlcgppMQ==") {
+  user(id: 1) {
     name
     email
   }
@@ -100,7 +100,22 @@ query {
 }
 ```
 
-Vnořené dotazy (spojení tabulek)
+### Vnořené dotazy (spojení tabulek)
+
+Přiřazení objednávky k uživateli
+
+```graphql
+mutation AddUsersOrder {
+  addUsersOrder(input: {
+    userId: 1
+    orderIds: [1, 2]
+  }) {
+    user {
+      id
+    }
+  }
+}
+```
 
 ```graphql
 query {
@@ -164,4 +179,41 @@ query {
 }
 ```
 
+```graphql
+query {
+  users {
+    name
+    orders {
+      id
+      orderDate
+      orderItems {
+        productId
+        count
+      }
+    }
+  }
+}
+```
+
+Výběr všeho
+
+```graphql
+query {
+  users {
+    name
+    orders {
+      id
+      orderDate
+      orderItems {
+        product {
+          name
+          price
+        }
+        count
+      }
+    }
+  }
+}
+
+```
 

@@ -19,7 +19,6 @@ namespace Eshop.GraphQL.OrderItems
 
 
         public Task<OrderItem> GetOrderItemAsync(
-            // [ID(nameof(OrderItem))]int id,
             int id,
             OrderItemByIdDataLoader dataLoader,
             CancellationToken cancellationToken) =>

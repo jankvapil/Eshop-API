@@ -26,7 +26,8 @@ namespace GraphQL
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddPooledDbContextFactory<ApplicationDbContext>(options => options.UseSqlite("Data Source=eshop.db"));
+            services.AddPooledDbContextFactory<ApplicationDbContext>(
+                options => options.UseSqlite("Data Source=eshop.db"));
 
             services
                 .AddGraphQLServer()
@@ -42,6 +43,7 @@ namespace GraphQL
                     .AddTypeExtension<OrderItemMutations>()
                 .AddType<UserType>()
                 .AddType<OrderType>()
+                .AddType<OrderItemType>()
                 // .EnableRelaySupport()
                 .AddDataLoader<OrderByIdDataLoader>()
                 .AddDataLoader<UserByIdDataLoader>();

@@ -15,21 +15,15 @@ namespace Eshop.GraphQL.Types
     {
         protected override void Configure(IObjectTypeDescriptor<User> descriptor)
         {
-        //   descriptor
-        //     .AsNode()
-        //     .IdField(t => t.Id)
-        //     .NodeResolver((ctx, id) => ctx.DataLoader<UserByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
-              
           descriptor
             .Field(t => t.UserOrders)
             .ResolveWith<UserResolvers>(t => t.GetOrdersAsync(default!, default!, default!, default))
-            // .UseDbContext<ApplicationDbContext>()
+            .UseDbContext<ApplicationDbContext>()
             .Name("orders");
         }
 
         private class UserResolvers
         {
-            [UseApplicationDbContext]
             public async Task<IEnumerable<Order>> GetOrdersAsync(
                 User user,
                 [ScopedService] ApplicationDbContext dbContext,

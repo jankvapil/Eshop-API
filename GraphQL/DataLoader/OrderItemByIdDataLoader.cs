@@ -31,7 +31,7 @@ namespace Eshop.GraphQL.DataLoader
                 _dbContextFactory.CreateDbContext();
 
             return await dbContext.OrderItems
-                .Where(u => keys.Contains(u.Id))
+                .Where(oi => keys.Contains(oi.Id))
                 .ToDictionaryAsync(t => t.Id, cancellationToken);
         }
     }

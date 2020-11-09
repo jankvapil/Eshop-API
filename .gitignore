@@ -2,3 +2,5 @@
 /GraphQL/obj
 
 /GraphQL/eshop.db
+/GraphQL/eshop.db-shm
+/GraphQL/eshop.db-wal

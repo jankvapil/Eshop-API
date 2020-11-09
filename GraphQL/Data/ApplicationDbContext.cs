@@ -20,12 +20,6 @@ namespace Eshop.GraphQL.Data
                 .HasOne<Order>(oi => oi.Order)
                 .WithMany(o => o.OrderItems)
                 .HasForeignKey(oi => oi.OrderId);
-
-            // modelBuilder
-            //     .Entity<OrderItem>()
-            //     .HasOne<Product>(oi => oi.Product)
-            //     .WithMany(oi => oi.OrderItems)
-            //     .HasForeignKey(oi => oi.ProductId);
         }
 
         public DbSet<User> Users { get; set; } = default!;

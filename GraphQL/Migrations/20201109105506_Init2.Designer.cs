@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eshop.GraphQL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201109083709_OrderItems")]
-    partial class OrderItems
+    [Migration("20201109105506_Init2")]
+    partial class Init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,11 +69,16 @@ namespace Eshop.GraphQL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("OrderItemId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<float?>("Price")
                         .IsRequired()
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderItemId");
 
                     b.ToTable("Products");
                 });
@@ -133,6 +138,13 @@ namespace Eshop.GraphQL.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Eshop.GraphQL.Data.Product", b =>
+                {
+                    b.HasOne("Eshop.GraphQL.Data.OrderItem", null)
+                        .WithMany("Products")
+                        .HasForeignKey("OrderItemId");
+                });
+
             modelBuilder.Entity("Eshop.GraphQL.Data.UserOrder", b =>
                 {
                     b.HasOne("Eshop.GraphQL.Data.Order", "Order")
@@ -157,6 +169,11 @@ namespace Eshop.GraphQL.Migrations
                     b.Navigation("OrderItems");
 
                     b.Navigation("UserOrders");
+                });
+
+            modelBuilder.Entity("Eshop.GraphQL.Data.OrderItem", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Eshop.GraphQL.Data.User", b =>

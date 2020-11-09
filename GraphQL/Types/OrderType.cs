@@ -15,34 +15,49 @@ namespace Eshop.GraphQL.Types
     {
         protected override void Configure(IObjectTypeDescriptor<Order> descriptor)
         {
-        //   descriptor
-        //     .AsNode()
-        //     .IdField(t => t.Id)
-        //     .NodeResolver((ctx, id) => ctx.DataLoader<OrderByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
-              
-          descriptor
-            .Field(t => t.UserOrders)
-            .ResolveWith<OrderResolvers>(t => t.GetUsersAsync(default!, default!, default!, default))
-            // .UseDbContext<ApplicationDbContext>()
-            .Name("users");
+            descriptor
+                .Field(t => t.UserOrders)
+                .ResolveWith<OrderResolvers>(t => t.GetUsersAsync(default!, default!, default!, default))
+                .UseDbContext<ApplicationDbContext>()
+                .Name("users");
+
+            descriptor
+                .Field(t => t.OrderItems)
+                .ResolveWith<OrderResolvers>(t => t.GetOrderItemsAsync(default!, default!, default!, default))
+                .UseDbContext<ApplicationDbContext>()
+                .Name("orderItems");
         }
 
         private class OrderResolvers
         {
-            [UseApplicationDbContext]
+            public async Task<IEnumerable<OrderItem>> GetOrderItemsAsync(
+                Order order,
+                [ScopedService] ApplicationDbContext dbContext,
+                OrderItemByIdDataLoader orderItemById,
+                CancellationToken cancellationToken)
+            {
+                int[] Ids = await dbContext.Orders
+                    .Where(o => o.Id == order.Id)
+                    .Include(o => o.OrderItems)
+                    .SelectMany(oi => oi.OrderItems.Select(t => t.Id))
+                    .ToArrayAsync();
+
+                return await orderItemById.LoadAsync(Ids, cancellationToken);
+            }
+
             public async Task<IEnumerable<User>> GetUsersAsync(
                 Order order,
                 [ScopedService] ApplicationDbContext dbContext,
                 UserByIdDataLoader userById,
                 CancellationToken cancellationToken)
             {
-                int[] userIds = await dbContext.Orders
+                int[] Ids = await dbContext.Orders
                     .Where(o => o.Id == order.Id)
                     .Include(o => o.UserOrders)
                     .SelectMany(o => o.UserOrders.Select(t => t.UserId))
                     .ToArrayAsync();
 
-                return await userById.LoadAsync(userIds, cancellationToken);
+                return await userById.LoadAsync(Ids, cancellationToken);
             }
         }
     }

@@ -19,7 +19,6 @@ namespace Eshop.GraphQL.Users
 
 
         public Task<User> GetUserAsync(
-            // [ID(nameof(User))]int id,
             int id,
             UserByIdDataLoader dataLoader,
             CancellationToken cancellationToken) =>

@@ -19,7 +19,6 @@ namespace Eshop.GraphQL.Products
 
 
         public Task<Product> GetProductAsync(
-            // [ID(nameof(Product))]int id,
             int id,
             ProductByIdDataLoader dataLoader,
             CancellationToken cancellationToken) =>
