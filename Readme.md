@@ -17,7 +17,11 @@ Spuštění aplikace
 dotnet run --project GraphQL
 ```
 
-## Vytvoření dat (mutace)
+## Struktura Databáze
+
+![ER](doc/ER.png =250x)
+
+## Vytvoření Dat (mutace)
 
 Vytvoření uživatele.
 
