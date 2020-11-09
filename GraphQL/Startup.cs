@@ -14,6 +14,8 @@ using Eshop.GraphQL.Data;
 using Eshop.GraphQL.DataLoader;
 using Eshop.GraphQL.Users;
 using Eshop.GraphQL.Orders;
+using Eshop.GraphQL.Products;
+using Eshop.GraphQL.OrderItems;
 using HotChocolate.AspNetCore.Voyager;
 
 namespace GraphQL
@@ -29,14 +31,18 @@ namespace GraphQL
             services
                 .AddGraphQLServer()
                 .AddQueryType(d => d.Name("Query"))
-                    .AddType<UserQueries>()
-                    .AddType<OrderQueries>()
+                    .AddTypeExtension<UserQueries>()
+                    .AddTypeExtension<OrderQueries>()
+                    .AddTypeExtension<ProductQueries>()
+                    .AddTypeExtension<OrderItemQueries>()
                 .AddMutationType(d => d.Name("Mutation"))
                     .AddTypeExtension<UserMutations>()
                     .AddTypeExtension<OrderMutations>()
+                    .AddTypeExtension<ProductMutations>()
+                    .AddTypeExtension<OrderItemMutations>()
                 .AddType<UserType>()
                 .AddType<OrderType>()
-                .EnableRelaySupport()
+                // .EnableRelaySupport()
                 .AddDataLoader<OrderByIdDataLoader>()
                 .AddDataLoader<UserByIdDataLoader>();
 

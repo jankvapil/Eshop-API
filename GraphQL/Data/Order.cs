@@ -12,5 +12,8 @@ namespace Eshop.GraphQL.Data
 
         public ICollection<UserOrder> UserOrders { get; set; } =
           new List<UserOrder>();
+
+        public ICollection<OrderItem> OrderItems { get; set; } =
+          new List<OrderItem>();
     }
 }

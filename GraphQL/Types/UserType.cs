@@ -15,10 +15,10 @@ namespace Eshop.GraphQL.Types
     {
         protected override void Configure(IObjectTypeDescriptor<User> descriptor)
         {
-          descriptor
-            .AsNode()
-            .IdField(t => t.Id)
-            .NodeResolver((ctx, id) => ctx.DataLoader<UserByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
+        //   descriptor
+        //     .AsNode()
+        //     .IdField(t => t.Id)
+        //     .NodeResolver((ctx, id) => ctx.DataLoader<UserByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
               
           descriptor
             .Field(t => t.UserOrders)

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Eshop.GraphQL.Data
 {
-    public class User
+    public class Product
     {
         public int Id { get; set; }
 
@@ -12,10 +12,6 @@ namespace Eshop.GraphQL.Data
         public string? Name { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string? Email { get; set; }
-
-        public ICollection<UserOrder> UserOrders { get; set; } =
-            new List<UserOrder>();
+        public float? Price { get; set; }
     }
 }

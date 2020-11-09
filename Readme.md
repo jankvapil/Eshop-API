@@ -22,7 +22,7 @@ dotnet run --project GraphQL
 Vytvoření uživatele.
 
 ```graphql
-mutation AddUser {
+mutation {
   addUser(input: {
     name: "User"
     email: "user@email.com"
@@ -37,7 +37,7 @@ mutation AddUser {
 Vytvoření objednávky.
 
 ```graphql
-mutation AddOrder {
+mutation {
   addOrder(input: {
     orderDate:  "2020-10-14 12:00:00.0"
   }) {
@@ -87,7 +87,7 @@ query {
 Paralelní vykonávání dotazů.
 
 ```graphql
-query GetUserNamesInParallel {
+query {
   a: users {
     name
   }
@@ -113,5 +113,55 @@ query {
 }
 ```
 
+## Product
+
+```graphql
+mutation {
+  addProduct(input: {
+    name: "Kofola",
+    price: 29.0
+  }) {
+    product {
+      id
+    }
+  }
+}
+```
+
+```graphql
+query {
+  products {
+    name
+    price
+  }
+}
+```
+
+## OrderItem
+
+```graphql
+mutation {
+  addOrderItem(input: {
+    orderId: 1
+    productId: 1
+    count: 2
+  }) {
+    orderItem {
+      id
+    }
+  }
+}
+```
+
+```graphql
+query {
+  orderItems {
+    id
+    productId
+    orderId
+    count
+  }
+}
+```
 
 

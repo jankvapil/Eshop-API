@@ -8,20 +8,20 @@ using HotChocolate;
 using HotChocolate.Types;
 using HotChocolate.Types.Relay;
 
-namespace Eshop.GraphQL.Users
+namespace Eshop.GraphQL.OrderItems
 {
     [ExtendObjectType(Name = "Query")]
-    public class UserQueries
+    public class OrderItemQueries
     {
         [UseApplicationDbContext]
-        public Task<List<User>> GetUsers([ScopedService] ApplicationDbContext context) =>
-            context.Users.ToListAsync();
+        public Task<List<OrderItem>> GetOrderItems([ScopedService] ApplicationDbContext context) =>
+            context.OrderItems.ToListAsync();
 
 
-        public Task<User> GetUserAsync(
-            // [ID(nameof(User))]int id,
+        public Task<OrderItem> GetOrderItemAsync(
+            // [ID(nameof(OrderItem))]int id,
             int id,
-            UserByIdDataLoader dataLoader,
+            OrderItemByIdDataLoader dataLoader,
             CancellationToken cancellationToken) =>
             dataLoader.LoadAsync(id, cancellationToken);
     }
