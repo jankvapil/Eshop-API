@@ -20,7 +20,8 @@ namespace Eshop.GraphQL.Users
             var user = new User
             {
                 Name = input.Name,
-                Email = input.Email
+                Email = input.Email,
+                Address = input.Address
             };
 
             // add to db-context

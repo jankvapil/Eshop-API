@@ -15,6 +15,10 @@ namespace Eshop.GraphQL.Data
         [StringLength(100)]
         public string? Email { get; set; }
 
+        [Required]
+        [StringLength(100)]
+        public string? Address { get; set; }
+
         public ICollection<UserOrder> UserOrders { get; set; } =
             new List<UserOrder>();
     }
