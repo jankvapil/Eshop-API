@@ -1,14 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using HotChocolate.AspNetCore;
+using HotChocolate.AspNetCore.Interceptors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Eshop.GraphQL;
 using Eshop.GraphQL.Types;
 using Eshop.GraphQL.Data;
@@ -41,6 +47,32 @@ namespace GraphQL
                            .WithMethods("GET", "POST")
                            .WithOrigins("*");
                 });
+            });
+
+            services.AddScoped<IIdentityService, IdentityService>();
+            services.AddHttpContextAccessor();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = true,
+                    ValidateIssuer = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidAudience = "audience",
+                    ValidIssuer = "issuer",
+                    RequireSignedTokens = false,
+                    IssuerSigningKey =
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secretsecretsecret"))
+                };
+
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
             });
 
 
@@ -87,6 +119,7 @@ namespace GraphQL
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
             app.UseCors("DefaultPolicy");
             app.UseRouting();
 

@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Eshop.GraphQL.Common;
 using Eshop.GraphQL.Data;
+using GraphQL;
 using HotChocolate;
 using HotChocolate.Types;
 
@@ -10,6 +11,10 @@ namespace Eshop.GraphQL.Users
     [ExtendObjectType(Name = "Mutation")]
     public class UserMutations
     {
+
+        public Task<string> GetToken(string email, string password, [Service] IIdentityService identityService) =>
+            identityService.Authenticate(email, password);
+            
       
         [UseApplicationDbContext]
         public async Task<AddUserPayload> AddUserAsync(
