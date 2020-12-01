@@ -13,6 +13,8 @@ namespace Eshop.GraphQL.Users
     [ExtendObjectType(Name = "Query")]
     public class UserQueries
     {
+        // TODO: ADD AUTHORIZATION!
+        
         [UseApplicationDbContext]
         public Task<List<User>> GetUsers([ScopedService] ApplicationDbContext context) =>
             context.Users.ToListAsync();

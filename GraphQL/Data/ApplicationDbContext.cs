@@ -11,6 +11,16 @@ namespace Eshop.GraphQL.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {  
+ 
+            modelBuilder.Entity<User>().Property(t => t.Name).IsRequired();
+            modelBuilder.Entity<User>().Property(t => t.Email).IsRequired();
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<User>().Property(t => t.Password).IsRequired();
+            modelBuilder.Entity<User>().Property(t => t.Address).IsRequired();
+
             modelBuilder
                 .Entity<UserOrder>()
                 .HasKey(uo => new { uo.UserId, uo.OrderId });

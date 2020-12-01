@@ -6,42 +6,38 @@ using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Eshop.GraphQL;
+using Eshop.GraphQL.Data;
 using Microsoft.IdentityModel.Tokens;
 
 namespace GraphQL
 {
     public interface IIdentityService
     {
-        Task<string> Authenticate(string email, string password);
+        Task<string> Authenticate(
+            string email, 
+            string password, 
+            ApplicationDbContext context
+        );
     }
 
     public class IdentityService : IIdentityService
     {
-        public async Task<string> Authenticate(string email, string password)
+        [UseApplicationDbContext]
+        public async Task<string> Authenticate(string email, string password, ApplicationDbContext context)
         {
-            //Your custom logic here (e.g. database query)
-            //Mocked for a sake of simplicity
+
             var roles = new List<string>();
 
-            if (email.Contains("hr"))
-            {
-                roles.Add("hr");
+            // User user = await context.Users.Select(u => u.Email == email)
+
+            foreach (var user in context.Users) {
+                if (user.Email == email && user.Password == password) {
+                    roles.Add("logged");
+                    break;
+                }
             }
 
-            if (email.Contains("dev"))
-            {
-                roles.Add("dev");
-            }
-
-            if (email.Contains("leader"))
-            {
-                roles.Add("leader");
-            }
-
-            if (email.Contains("employee"))
-            {
-                roles.Add("employee");
-            }
 
             if (roles.Count > 0)
             {

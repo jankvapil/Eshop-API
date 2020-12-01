@@ -12,8 +12,13 @@ namespace Eshop.GraphQL.Users
     public class UserMutations
     {
 
-        public Task<string> GetToken(string email, string password, [Service] IIdentityService identityService) =>
-            identityService.Authenticate(email, password);
+        [UseApplicationDbContext]
+        public Task<string> GetToken(
+            string email, 
+            string password, 
+            [Service] IIdentityService identityService, 
+            [ScopedService] ApplicationDbContext context
+        ) => identityService.Authenticate(email, password, context);
             
       
         [UseApplicationDbContext]
@@ -26,6 +31,7 @@ namespace Eshop.GraphQL.Users
             {
                 Name = input.Name,
                 Email = input.Email,
+                Password = input.Password,
                 Address = input.Address
             };
 
