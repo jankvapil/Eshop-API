@@ -17,6 +17,10 @@ Spuštění aplikace
 dotnet run --project GraphQL
 ```
 
+[Deploy](https://www.halldorstefans.com/using-sqlite-in-net-core-azure-web-app/) aplikace na Azure.
+
+
+
 ## Struktura Databáze
 
 Pro jednoduchost uvažujeme schéma pro SQLite databázi.

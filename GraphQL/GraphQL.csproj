@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Eshop.GraphQL</RootNamespace>
     <Nullable>enable</Nullable>
+    <UserSecretsId>b39d4e07-463d-4b1f-b990-43ef84b17152</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
