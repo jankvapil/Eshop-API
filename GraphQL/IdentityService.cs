@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Eshop.GraphQL;
 using Eshop.GraphQL.Data;
 using Microsoft.IdentityModel.Tokens;
+using BC = BCrypt.Net.BCrypt;
 
 namespace GraphQL
 {
@@ -32,8 +33,13 @@ namespace GraphQL
             // User user = await context.Users.Select(u => u.Email == email)
 
             foreach (var user in context.Users) {
-                if (user.Email == email && user.Password == password) {
-                    roles.Add("logged");
+                if (user.Email == email) {
+
+                    var passCheck = BC.Verify(password, user.Password);
+
+                    if (passCheck) {
+                        roles.Add("logged");
+                    } 
                     break;
                 }
             }
@@ -59,7 +65,6 @@ namespace GraphQL
             };
 
             claims = claims.Concat(roles.Select(role => new Claim(ClaimTypes.Role, role))).ToList();
-
 
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

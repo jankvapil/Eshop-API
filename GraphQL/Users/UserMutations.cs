@@ -5,6 +5,7 @@ using Eshop.GraphQL.Data;
 using GraphQL;
 using HotChocolate;
 using HotChocolate.Types;
+using BC = BCrypt.Net.BCrypt;
 
 namespace Eshop.GraphQL.Users
 {
@@ -26,12 +27,15 @@ namespace Eshop.GraphQL.Users
             AddUserInput input,
             [ScopedService] ApplicationDbContext context)
         {
+            // hash password
+            var hashedPass = BC.HashPassword(input.Password);
+            
             // create new user
             var user = new User
             {
                 Name = input.Name,
                 Email = input.Email,
-                Password = input.Password,
+                Password = hashedPass,
                 Address = input.Address
             };
 
