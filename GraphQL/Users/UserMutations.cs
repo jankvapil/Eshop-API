@@ -28,14 +28,15 @@ namespace Eshop.GraphQL.Users
             [ScopedService] ApplicationDbContext context)
         {
             // hash password
-            var hashedPass = BC.HashPassword(input.Password);
+            // var hashedPass = BC.HashPassword(input.Password);
             
             // create new user
             var user = new User
             {
                 Name = input.Name,
                 Email = input.Email,
-                Password = hashedPass,
+                // Password = hashedPass,
+                Password = input.Password,
                 Address = input.Address
             };
 

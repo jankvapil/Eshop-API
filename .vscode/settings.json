@@ -1,4 +1,5 @@
 {
   "appService.preDeployTask": "publish-release",
-  "appService.deploySubpath": "GraphQL/bin/Release/net5.0/publish"
+  "appService.deploySubpath": "GraphQL/bin/Release/net5.0/publish",
+  "appService.defaultWebAppToDeploy": "None"
 }

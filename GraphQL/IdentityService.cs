@@ -32,12 +32,15 @@ namespace GraphQL
 
             // User user = await context.Users.Select(u => u.Email == email)
 
+            int id = -1;
+
             foreach (var user in context.Users) {
                 if (user.Email == email) {
-
+                    
                     var passCheck = BC.Verify(password, user.Password);
 
                     if (passCheck) {
+                        id = user.Id;
                         roles.Add("logged");
                     } 
                     break;
@@ -47,7 +50,8 @@ namespace GraphQL
 
             if (roles.Count > 0)
             {
-                return GenerateAccessToken(email, Guid.NewGuid().ToString(), roles.ToArray());
+                // return GenerateAccessToken(email, Guid.NewGuid().ToString(), roles.ToArray());
+                return GenerateAccessToken(email, id.ToString(), roles.ToArray());
             }
 
             throw new AuthenticationException();
