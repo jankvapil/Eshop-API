@@ -40,8 +40,15 @@ namespace GraphQL
                     var passCheck = BC.Verify(password, user.Password);
 
                     if (passCheck) {
+
+                        if (user.Id == 4) {
+                            
+                            roles.Add("admin");
+                        } else {
+
+                            roles.Add("logged");
+                        }
                         id = user.Id;
-                        roles.Add("logged");
                     } 
                     break;
                 }

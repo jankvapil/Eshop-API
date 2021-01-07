@@ -52,6 +52,19 @@ namespace GraphQL
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddHttpContextAccessor();
 
+            services.AddAuthorization(x =>
+            {
+                x.AddPolicy("hr-department", builder =>
+                    builder
+                        .RequireAuthenticatedUser()
+                        .RequireRole("hr")
+                );
+
+                x.AddPolicy("DevDepartment", builder =>
+                    builder.RequireRole("dev")
+                );
+            });
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -101,9 +114,32 @@ namespace GraphQL
                 .AddType<OrderItemType>()
                 // .EnableRelaySupport()
                 .AddDataLoader<OrderByIdDataLoader>()
-                .AddDataLoader<UserByIdDataLoader>();
+                .AddDataLoader<UserByIdDataLoader>()
+                .AddHttpRequestInterceptor(
+                    (context, executor, builder, ct) =>
+                    {
+                         builder.SetProperty("currentUser",
+                                new CurrentUser(
+                                    context.User.FindFirstValue(ClaimTypes.NameIdentifier),
+                                    context.User.Claims.Select(x => $"{x.Type} : {x.Value}").ToList()));
 
+                        try {
+                           
+
+                            var role = context.User.FindFirstValue(ClaimTypes.Role);
+                            if (role.Length >= 1) {
+                                Console.WriteLine(role);
+                            }
+                        } catch (Exception e) {
+                            
+                            Console.WriteLine(e);
+                        }
+
+
+                        return new ValueTask();
+                    });
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
