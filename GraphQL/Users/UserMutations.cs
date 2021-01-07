@@ -19,51 +19,10 @@ namespace Eshop.GraphQL.Users
     public class UserMutations
     {
 
-        public string Unauthorized()
-        {
-            return "unauthorized";
-        }
-
-        [Authorize]
-        public List<string> Authorized([Service] IHttpContextAccessor contextAccessor)
-        {
-            return contextAccessor.HttpContext.User.Claims.Select(x => $"{x.Type} : {x.Value}").ToList();
-        }
-
-        [Authorize(Roles = new[] {"admin"})]
-        public string AdminOnly()
-        {
-            return "admin only";
-        }
-
-        [Authorize]
-        public List<string> AuthorizedBetterWay([GlobalState("currentUser")] CurrentUser user)
-        {
-            return user.Claims;
-        }
-
-
-    [   Authorize(Roles = new[] {"leader"})]
-        public List<string> AuthorizedLeader([GlobalState("currentUser")] CurrentUser user)
-        {
-            return user.Claims;
-        }
-
-        [Authorize(Roles = new[] {"dev"})]
-        public List<string> AuthorizedDev([GlobalState("currentUser")] CurrentUser user)
-        {
-            return user.Claims;
-        }
-
-        [Authorize(Policy = "DevDepartment")]
-        public List<string> AuthorizedDevDepartment([GlobalState("currentUser")] CurrentUser user)
-        {
-            return user.Claims;
-        }
 
 
         /////////////////////////////////////////
-        
+
         [UseApplicationDbContext]
         public Task<string> GetToken(
             string email, 

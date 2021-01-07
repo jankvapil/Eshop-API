@@ -115,6 +115,7 @@ namespace GraphQL
                 // .EnableRelaySupport()
                 .AddDataLoader<OrderByIdDataLoader>()
                 .AddDataLoader<UserByIdDataLoader>()
+                .AddAuthorization()
                 .AddHttpRequestInterceptor(
                     (context, executor, builder, ct) =>
                     {
