@@ -124,18 +124,18 @@ namespace GraphQL
                                     context.User.FindFirstValue(ClaimTypes.NameIdentifier),
                                     context.User.Claims.Select(x => $"{x.Type} : {x.Value}").ToList()));
 
-                        try {
-                           
+                        ///
+                        /// Prints role of logged user
+                        ///
 
-                            var role = context.User.FindFirstValue(ClaimTypes.Role);
-                            if (role.Length >= 1) {
-                                Console.WriteLine(role);
-                            }
-                        } catch (Exception e) {
-                            
-                            Console.WriteLine(e);
-                        }
-
+                        // try {
+                        //     var role = context.User.FindFirstValue(ClaimTypes.Role);
+                        //     if (role.Length >= 1) {
+                        //         Console.WriteLine(role);
+                        //     }
+                        // } catch (Exception e) {
+                        //     Console.WriteLine(e);
+                        // }
 
                         return new ValueTask();
                     });

@@ -19,8 +19,6 @@ namespace Eshop.GraphQL.Users
     public class UserMutations
     {
 
-
-
         /////////////////////////////////////////
 
         [UseApplicationDbContext]

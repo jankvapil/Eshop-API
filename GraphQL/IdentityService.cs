@@ -41,11 +41,12 @@ namespace GraphQL
 
                     if (passCheck) {
 
-                        if (user.Id == 4) {
-                            
+                        //
+                        // TODO: create new table in DB for roles..
+                        //
+                        if (user.Id % 2 == 0) { 
                             roles.Add("admin");
                         } else {
-
                             roles.Add("logged");
                         }
                         id = user.Id;
